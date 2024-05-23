@@ -48,6 +48,8 @@ public class Transaccion {
 	public void setMontoTotal(double montoTotal) {
 		this.montoTotal = montoTotal;
 	}
-	
+	public String ToString(double monto) {
+		return "ID:  "+id+"\n"+"Pedido: "+pedido.getArticulo()+"\n"+"Fecha de pago: "+fechaPago+"\n"+"Monto total: "+monto+"\n";
+	}
 	
 }

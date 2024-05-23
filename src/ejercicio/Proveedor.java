@@ -20,7 +20,17 @@ public class Proveedor extends Empresa implements Facturacion {
 		this.pedidostienda = pedidostienda;
 	}
 	public void emitirFactura(Transaccion transaccion) {
-		if(transaccion.getMontoTotal()){}
+		double total = transaccion.getMontoTotal();
+		if(total<100000){
+			transaccion.setMontoTotal((total*5)/100);
+		}else if(total>100000 && total<600000) {
+			transaccion.setMontoTotal((total*10)/100);
+		}else if(total>600000 && total<1200000) {
+			transaccion.setMontoTotal((total*20)/100);
+		}else if(total>1200000) {
+			transaccion.setMontoTotal((total*30)/100);
+		}
+		System.out.println(transaccion.ToString(total));
 	}
 	public String getNombreContacto() {
 		return nombreContacto;

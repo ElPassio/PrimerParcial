@@ -39,7 +39,8 @@ public class Tienda extends Empresa implements Facturacion, Comprador{
 	}
 	
 	public void emitirFactura(Transaccion transaccion) {
-		
+		double total = transaccion.getMontoTotal();
+		System.out.println(transaccion.ToString(total));
 	}
 
 	public int getSucursal() {
