@@ -22,12 +22,17 @@ public class Tienda extends Empresa implements Facturacion, Comprador{
 		this.transacciones = transacciones;
 	}
 	
-	public void agregarArticulo(Articulo articulo) {
-		
+	public void agregarArticulo(Articulo articulo,int cantart) {
+		inventario[cantart]=articulo;
 	}
 	
 	public void eliminarArticulo(Articulo articulo) {
-		
+		for(Articulo a : inventario) {
+			if(a.getId()==articulo.getId()) {
+				a=null;
+				inventario[indexOf(a)]=0;
+			}
+		}
 	}
 	
 	public Articulo buscarArticulo(String nombre, Articulo inventario) {
@@ -73,5 +78,10 @@ public class Tienda extends Empresa implements Facturacion, Comprador{
 
 	public void setTransacciones(Transaccion[] transacciones) {
 		this.transacciones = transacciones;
+	}
+	public void despacharPedidos(Tienda tienda, Articulo comp, String nombre) {
+		if(tienda.buscarArticulo(getNombre(), comp)) {
+			
+		}
 	}
 }

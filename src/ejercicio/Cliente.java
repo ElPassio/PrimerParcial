@@ -32,8 +32,7 @@ public class Cliente implements Comprador{
 	public void setDocumento(int documento) {
 		this.documento = documento;
 	}
-	public static void realizarPedido(Pedido pedido, Empresa tienda, int cant) { // pedido es el pedido del cliente
-		Articulo art[] = new Articulo[cant];
+	public void realizarPedido(Pedido pedido, Empresa tienda) { // pedido es el pedido del cliente
 		
 		
 	}
