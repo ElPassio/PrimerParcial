@@ -11,6 +11,11 @@ public class Empresa {
 		this.nombre = nombre;
 		this.cuit = cuit;
 	}
+	
+	public void despacharPedidos(Pedido pedidos[]) {
+		
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}
