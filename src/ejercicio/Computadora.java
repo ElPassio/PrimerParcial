@@ -3,6 +3,7 @@ package ejercicio;
 public class Computadora extends Componente{
 	private String especificaciones;
 	public Computadora() {
+		super();
 		this.especificaciones="";
 	}
 	public Computadora(String especificaciones,String marca,  int id, String nombre, double precio) {

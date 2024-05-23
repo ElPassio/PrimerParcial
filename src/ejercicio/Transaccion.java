@@ -11,7 +11,6 @@ public class Transaccion {
 		id = 0; pedido = new Pedido(); estado = ""; fechaPago = ""; montoTotal=0;
 	}
 	public Transaccion(int id, Pedido pedido, String estado, String fechaPago, double montoTotal) {
-		super();
 		this.id = id;
 		this.pedido = pedido;
 		this.estado = estado;
