@@ -1,13 +1,15 @@
 package ejercicio;
 
-public class Venta {
+public class Venta extends Transaccion{
 	private Tienda tienda;
 	private Cliente cliente;
 	
 	public Venta() {
+		super();
 		tienda = new Tienda(); cliente = new Cliente();
 	}
-	public Venta(Tienda tienda, Cliente cliente) {
+	public Venta(Tienda tienda, Cliente cliente, int id, Pedido pedido, String estado, String fechaPago, double montoTotal) {
+		super(id, pedido, estado, fechaPago, montoTotal);
 		this.cliente = cliente; this.tienda = tienda;
 	}
 	

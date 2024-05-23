@@ -21,6 +21,19 @@ public class Tienda extends Empresa implements Facturacion, Comprador{
 		this.pedidosClientes = pedidosClientes;
 		this.transacciones = transacciones;
 	}
+	
+	public void agregarArticulo(Articulo articulo) {
+		
+	}
+	
+	public void eliminarArticulo(Articulo articulo) {
+		
+	}
+	
+	public Articulo buscarArticulo(String nombre, Articulo inventario) {
+		return inventario;
+	}
+	
 	public void realizarPedido(Pedido pedido, Empresa empresa) {
 		
 	}
