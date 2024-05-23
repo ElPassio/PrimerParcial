@@ -60,7 +60,10 @@ public class Tienda extends Empresa implements Facturacion{
 	public void setTransacciones(Transaccion[] transacciones) {
 		this.transacciones = transacciones;
 	}
+<<<<<<< HEAD
 	
 	
 	
+=======
+>>>>>>> 58087331691f039f2b3f1eea5dbb41f3a46afffd
 }
