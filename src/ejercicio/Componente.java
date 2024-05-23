@@ -3,6 +3,7 @@ package ejercicio;
 public class Componente extends Articulo{
 	private String marca;
 	public Componente() {
+		super();
 		this.marca="";
 	}
 	public Componente(String marca, int id, String nombre, double precio) {

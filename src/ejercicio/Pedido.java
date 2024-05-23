@@ -13,7 +13,6 @@ public class Pedido {
 	}
 
 	public Pedido(int id, Articulo[] articulo, double cotizacionTotal, String fechaCotizacion) {
-		super();
 		this.id = id;
 		this.articulo = articulo;
 		this.cotizacionTotal = cotizacionTotal;
@@ -55,7 +54,4 @@ public class Pedido {
 	public void setFechaCotizacion(String fechaCotizacion) {
 		this.fechaCotizacion = fechaCotizacion;
 	}
-	
-	
-	
 }

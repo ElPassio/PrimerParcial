@@ -3,7 +3,8 @@ package ejercicio;
 public class Periferico extends Componente {
 	private String tipo;
 	public Periferico() {
-	this.tipo = "";	
+		super();
+		this.tipo = "";	
 	}
 	public Periferico(String tipo, String marca, int id, String nombre, double precio) {
 		super(marca, id, nombre, precio);
