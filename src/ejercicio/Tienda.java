@@ -1,6 +1,6 @@
 package ejercicio;
 
-public class Tienda implements Facturacion extends Empresa{
+public class Tienda extends Empresa implements Facturacion{
 	private int sucursal;
 	public Articulo inventario[];
 	public Pedido pedidosClientes[];
@@ -11,6 +11,9 @@ public class Tienda implements Facturacion extends Empresa{
 		this.inventario = inventario;
 		this.pedidosClientes = pedidosClientes;
 		this.transacciones = transacciones;
+	}
+	public void realizarPedido(Pedido pedido, Empresa empresa) {
+		
 	}
 	
 }
