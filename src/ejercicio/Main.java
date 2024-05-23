@@ -28,13 +28,13 @@ public class Main {
 	
 	public static void main(String[] args) {
 		// TIENDA
+		int cantart=0;
 		Articulo inventario[] = new Articulo[maxVec];
 		Pedido pedidosClientes[] = new Pedido[maxVec];
 		Transaccion transacciones[] = new Transaccion[maxVec];
-		Empresa tienda = new Tienda(1, inventario, pedidosClientes, transacciones, "PassioShop", "20-42324345-4");
+		Tienda tienda = new Tienda(1, inventario, pedidosClientes, transacciones, "PassioShop", "20-42324345-4");
 		// ARTICULOS DE LA TIENDA
 		Articulo comput = new Computadora("RYZEN 3600, RTX 5500, 12 GB RAM", "AMD", 2324, "Computadora", 3500);
-		
 		// CLIENTE
 		Cliente cl1 = new Cliente("Dario", "Debesa", 45465012);
 		// PEDIDO DEL CLIENTE
@@ -45,7 +45,7 @@ public class Main {
 		Transaccion transac1 = new Transaccion(12, pedcl1, "", "23/5/2024", pedcl1.getCotizacionTotal());
 		// VENTA
 		Venta venta1 = new Venta(tienda, cl1, 1, pedcl1, "", "23/5/2024", transac1.getMontoTotal());
-		
+		tienda.agregarArticulo(comput, cantart);
 		
 		/*int opc = 1;
 		Scanner scan = new Scanner(System.in);
