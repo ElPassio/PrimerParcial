@@ -1,6 +1,6 @@
 package ejercicio;
 
-public class Tienda extends Empresa implements Facturacion{
+public class Tienda extends Empresa implements Facturacion, Comprador{
 	private int sucursal;
 	public Articulo inventario[];
 	public Pedido pedidosClientes[];
