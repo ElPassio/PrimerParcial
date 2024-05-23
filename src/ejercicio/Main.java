@@ -27,13 +27,16 @@ public class Main {
 	}
 	
 	public static void main(String[] args) {
+		// ARTICULOS DE LA TIENDA
+		Articulo comput = new Computadora("RYZEN 3600, RTX 5500, 12 GB RAM", "AMD", 2324, "Computadora", 3500);
 		// TIENDA
 		Articulo inventario[] = new Articulo[maxVec];
 		Pedido pedidosClientes[] = new Pedido[maxVec];
 		Transaccion transacciones[] = new Transaccion[maxVec];
-		Empresa tienda = new Tienda(1, inventario, pedidosClientes, transacciones, "PassioShop", "20-42324345-4");
-		// ARTICULOS DE LA TIENDA
-		Articulo comput = new Computadora("RYZEN 3600, RTX 5500, 12 GB RAM", "AMD", 2324, "Computadora", 3500);
+		Tienda tienda = new Tienda(1, inventario, pedidosClientes, transacciones, "PassioShop", "20-42324345-4");
+		tienda.inventario[0] = comput;
+		tienda.inventario[1] = comput;
+		
 		
 		// CLIENTE
 		Cliente cl1 = new Cliente("Dario", "Debesa", 45465012);
