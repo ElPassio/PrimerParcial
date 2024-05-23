@@ -10,7 +10,7 @@ public class Main {
 							+ "3) C\n"
 							+ "0) Salir\n\n"
 							+ "Opcion: ");
-		int op = elegirOpcion(8, 0, scan);
+		int op = elegirOpcion(4, 0, scan);
 		return op;
 	}
 	
@@ -47,6 +47,7 @@ public class Main {
 				  break;
 			}
 		}
+		scan.close();
 	}
 	
 	
