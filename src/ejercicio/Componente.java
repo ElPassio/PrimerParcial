@@ -5,7 +5,8 @@ public class Componente extends Articulo{
 	public Componente() {
 		this.marca="";
 	}
-	public Componente(String marca) {
+	public Componente(String marca, int id, String nombre, double precio) {
+		super(id, nombre, precio);
 		this.marca=marca;
 	}
 	public String getMarca() {

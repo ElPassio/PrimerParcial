@@ -5,7 +5,8 @@ public class Computadora extends Componente{
 	public Computadora() {
 		this.especificaciones="";
 	}
-	public Computadora(String especificaciones) {
+	public Computadora(String especificaciones,String marca,  int id, String nombre, double precio) {
+		super(marca, id, nombre, precio);
 		this.especificaciones=especificaciones;
 	}
 	public String getEspecificaciones() {

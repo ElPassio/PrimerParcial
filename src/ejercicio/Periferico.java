@@ -5,7 +5,8 @@ public class Periferico extends Componente {
 	public Periferico() {
 	this.tipo = "";	
 	}
-	public Periferico(String tipo) {
+	public Periferico(String tipo, String marca, int id, String nombre, double precio) {
+		super(marca, id, nombre, precio);
 		this.tipo = tipo;
 	}
 	public String getTipo() {
