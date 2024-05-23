@@ -2,7 +2,7 @@ package ejercicio;
 import java.util.Scanner;
 
 public class Main {
-
+	public static final int maxVec = 10;
 	public static int menu(Scanner scan) {
 		System.out.println("Bienvenido al sistema de Emergencias\n\n"
 							+ "1) A\n"
