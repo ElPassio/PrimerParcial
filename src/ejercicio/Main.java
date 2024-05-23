@@ -27,7 +27,16 @@ public class Main {
 	}
 	
 	public static void main(String[] args) {
-		int opc = 1;
+		// TIENDA
+		Articulo inventario[] = new Articulo[maxVec];
+		Pedido pedidosClientes[] = new Pedido[maxVec];
+		Transaccion transacciones[] = new Transaccion[maxVec];
+		Empresa tienda = new Tienda(1, inventario, pedidosClientes, transacciones, "PassioShop", "20-42324345-4");
+		
+		
+		
+		
+		/*int opc = 1;
 		Scanner scan = new Scanner(System.in);
 		while (opc!=0) {
 			
@@ -47,8 +56,10 @@ public class Main {
 				
 				  break;
 			}
+			
 		}
 		scan.close();
+		*/
 	}
 	
 	
