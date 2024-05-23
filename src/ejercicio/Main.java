@@ -29,6 +29,7 @@ public class Main {
 	public static void main(String[] args) {
 		// ARTICULOS DE LA TIENDA
 		Articulo comput = new Computadora("RYZEN 3600, RTX 5500, 12 GB RAM", "AMD", 2324, "Computadora", 3500);
+		
 		// TIENDA
 		int cantart=0;
 		Articulo inventario[] = new Articulo[maxVec];

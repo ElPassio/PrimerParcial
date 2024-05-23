@@ -30,13 +30,19 @@ public class Tienda extends Empresa implements Facturacion, Comprador{
 		for(Articulo a : inventario) {
 			if(a.getId()==articulo.getId()) {
 				a=null;
-				inventario[indexOf(a)]=0;
+				//inventario[indexOf(a)]=0;
 			}
 		}
 	}
 	
-	public Articulo buscarArticulo(String nombre, Articulo inventario) {
-		return inventario;
+	public Articulo buscarArticulo(String nombre) {
+		Articulo result = new Articulo();
+		for (Articulo i : inventario) {
+			if (i.getNombre() == nombre) {
+				result = i;
+			}
+		}
+		return result;
 	}
 	
 	public void realizarPedido(Pedido pedido, Empresa empresa) {
