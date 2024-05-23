@@ -28,4 +28,39 @@ public class Tienda extends Empresa implements Facturacion{
 	public void emitirFactura(Transaccion transaccion) {
 		
 	}
+
+	public int getSucursal() {
+		return sucursal;
+	}
+
+	public void setSucursal(int sucursal) {
+		this.sucursal = sucursal;
+	}
+
+	public Articulo[] getInventario() {
+		return inventario;
+	}
+
+	public void setInventario(Articulo[] inventario) {
+		this.inventario = inventario;
+	}
+
+	public Pedido[] getPedidosClientes() {
+		return pedidosClientes;
+	}
+
+	public void setPedidosClientes(Pedido[] pedidosClientes) {
+		this.pedidosClientes = pedidosClientes;
+	}
+
+	public Transaccion[] getTransacciones() {
+		return transacciones;
+	}
+
+	public void setTransacciones(Transaccion[] transacciones) {
+		this.transacciones = transacciones;
+	}
+	
+	
+	
 }
