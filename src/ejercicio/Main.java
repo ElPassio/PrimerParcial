@@ -32,8 +32,19 @@ public class Main {
 		Pedido pedidosClientes[] = new Pedido[maxVec];
 		Transaccion transacciones[] = new Transaccion[maxVec];
 		Empresa tienda = new Tienda(1, inventario, pedidosClientes, transacciones, "PassioShop", "20-42324345-4");
+		// ARTICULOS
+		Articulo comput = new Computadora("RYZEN 3600, RTX 5500, 12 GB RAM", "AMD", 2324, "Computadora", 3500);
 		
-		
+		// CLIENTE
+		Cliente cl1 = new Cliente("Dario", "Debesa", 45465012);
+		// PEDIDO DEL CLIENTE
+		Pedido artcl1 = new Articulo();
+		artcl1.pedido[0] = comput;
+		Pedido pedcl1 = new Pedido(12, comput)
+		// TRANSACCION
+		Transaccion transac1 = new Transaccion(12, )
+		// VENTA
+		Venta venta1 = new Venta(cl1, tienda);
 		
 		
 		/*int opc = 1;
