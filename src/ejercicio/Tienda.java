@@ -28,33 +28,50 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 		for (Articulo i : inventario) {
 			if (i == null) {
 				i = articulo;
+				return;
 			}
 		}
 	}
 
-	public void eliminarArticulo(Articulo articulo) {
-		Articulo buscaArt = articulo;
+	public boolean eliminar(Articulo articulo) {
+		boolean resultado = false;
 		for (int i = 0; i < inventario.length; i++) {
-			if (inventario[i].getId() == buscaArt.getId()) {
-				inventario[i] = inventario[i + 1];
-				inventario[inventario.length] = null;
+			if (inventario[i] == articulo) {
+				for (int j = i; j < inventario.length - 1; j++) {
+					inventario[j] = inventario[j+1];
+				}
+				inventario[inventario.length - 1] = null;
+				resultado = true;
+			}
+		}
+		return resultado;
+	}
+	
+	public void eliminarArticulo(Articulo articulo) {
+		System.out.println("Se entro a eliminarArticulo");
+		String nombre = articulo.getNombre();
+		if (buscarArticulo(articulo.getNombre()) == articulo) {
+			if (eliminar(articulo)) {
+				System.out.println("Se elimino "+nombre+" del inventario.");
+			} else {
+				System.err.println("El arreglo sigue intacto.");
 			}
 		}
 	}
 
 	public Articulo buscarArticulo(String nombre) {
-		Articulo result = new Articulo();
+		//Articulo result = new Articulo();
+		//System.out.println("Se va a buscar: "+nombre);
 		for (Articulo i : inventario) {
 			if (i!=null) {
 				if (i.getNombre() == nombre) {
-					result = i;
+					//System.out.println("Se encontro el articulo: "+i.getNombre());
+					return i;
 				}
 			}
 		}
-		if (result.getNombre().equals(nombre)) {
-			return null;
-		}
-		return result;
+		System.out.println("No se encontro el articulo.");
+		return null;
 	}
 
 	public void realizarPedido(Pedido pedido[], Empresa empresa) {
@@ -66,9 +83,11 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 	}
 
 	public double emitirFactura(Transaccion transaccion) {
+		System.out.println("Se entro a emitir factura");
 		if (transaccion instanceof Venta) {
+			System.out.println("Es instanceof de venta.");
 			for (Articulo a : transaccion.getPedido().getArticulo()) {
-				if (buscarArticulo(a.getNombre()).equals(a)) {
+				if (buscarArticulo(a.getNombre())==a) {
 					eliminarArticulo(buscarArticulo(a.getNombre()));
 				}
 			}
@@ -80,6 +99,8 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 		for (Transaccion aux : transacciones) {
 			if (aux == null) {
 				aux = t;
+				System.out.println("Se agrego la transaccion");
+				return;
 			}
 		}
 	}
@@ -92,11 +113,13 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 					for (Articulo a : p.getArticulo()) {
 						if (a!=null) {
 							if ((buscarArticulo(a.getNombre())) == a) {
+								//System.out.println("\nEl articulo es: "+buscarArticulo(a.getNombre()));
 								// DESPACHAR PEDIDO si TRUE
 								t = new Transaccion(p.getId(), p, "DESPACHADO", Main.fechaHoy, p.getCotizacionTotal());
 								agregarTransaccion(t);
 								emitirFactura(t);
 							} else {
+								System.err.println("\nEl articulo no esta en el inventario.");
 								t = new Transaccion(p.getId(), p, "CANCELADO", Main.fechaHoy, p.getCotizacionTotal());
 								agregarTransaccion(t);
 							}

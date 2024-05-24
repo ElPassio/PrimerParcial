@@ -84,8 +84,8 @@ public class Main {
 		
 		// PEDIDO DE CLIENTES
 		Articulo art[] = new Articulo[maxVec];
-		art[0] = comput; art[3] = mouse;
-		art[1] = mouse; art [4] = comput;
+		art[1] = mouse;
+		art[2] = comput;
 		
 		int opc = 1;
 		Scanner scan = new Scanner(System.in);
@@ -102,7 +102,7 @@ public class Main {
 							//genera pedido de proveedores
 							Pedido pedT1 = new Pedido(125, art, 1, "23/5/2024");
 							Pedido pedT2 = new Pedido(125, art, 1, "23/5/2024");
-							Transaccion transac1 = new Transaccion();
+							Transaccion transac1 = new Venta();
 							tienda.agregarArticulo(art[0]);
 							tienda.agregarArticulo(art[1]);
 							tienda.realizarPedido(pedidosTienda, tienda);
