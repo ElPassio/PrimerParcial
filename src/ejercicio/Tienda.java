@@ -60,7 +60,7 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 		}
 	}
 
-	public void emitirFactura(Transaccion transaccion) {
+	public double emitirFactura(Transaccion transaccion) {
 		if (transaccion instanceof Venta) {
 			for (Articulo a : transaccion.getPedido().getArticulo()) {
 				if (buscarArticulo(a.getNombre()) == a) {
@@ -68,6 +68,7 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 				}
 			}
 		}
+		return transaccion.getMontoTotal();
 	}
 	
 	public void agregarTransaccion(Transaccion t) {
