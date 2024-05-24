@@ -20,7 +20,15 @@ public class Pedido {
 	}
 
 	public void actualizarCotizacion() {
-		
+		if (articulo != null) {
+			for (Articulo a : articulo) {
+				if (a != null) {
+					cotizacionTotal += a.getPrecio();
+				}
+			}
+		} else {
+			System.err.println("\nEl pedido no tiene articulos.");
+		}
 	}
 	
 	public int getId() {
