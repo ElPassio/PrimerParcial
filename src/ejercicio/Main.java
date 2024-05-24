@@ -46,15 +46,6 @@ public class Main {
 		}
 		return opc;
 	}
-	public static Cliente buscarCliente(Cliente clientes[], int docBuscar) {
-		Cliente aux = new Cliente();
-		for(int i=0; i<clientes.length; i++) {
-			if(docBuscar == clientes[i].getDocumento()) {
-				aux =clientes[i];
-			}
-		}
-		return aux;
-	}
 
 	public static void main(String[] args) {
 		
@@ -149,22 +140,7 @@ public class Main {
 						Venta venta1 = new Venta(tienda, c, tienda.transacciones[1].getId(), tienda.transacciones[1].getPedido(), tienda.transacciones[1].getEstado(), tienda.transacciones[1].getFechaPago(), tienda.transacciones[1].getMontoTotal());
 						System.out.println(venta1.toString());
 						break;
-					case 2:
-						//busca la tienda entre las que hay con el mismo nombre
-						Tienda buscaT = new Tienda();
-						buscaT.setNombre("PassioShop");
-					
-							//compara si es igual el que esta en array al ingresado
-							if(tienda.getNombre().equals(buscaT.getNombre())) {
-								//ingresa un nuevo articulo al inventario de la tienda seleccionada
-									tienda.getInventario()[0] = art[0];
-							}
-						
-						break;
 				}
-					break;
-				case 3:
-					
 					break;
 				default:
 				
