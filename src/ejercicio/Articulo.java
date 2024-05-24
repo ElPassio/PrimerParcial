@@ -32,4 +32,7 @@ public class Articulo{
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
+	public String toString() {
+		return id + "\t" +nombre +"\t"+precio;
+	}
 }

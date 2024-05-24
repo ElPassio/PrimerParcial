@@ -26,6 +26,6 @@ public class Venta extends Transaccion{
 		this.cliente = cliente;
 	}
 	public String toString() {
-		return "Tienda: "+tienda.getNombre()+"\n"+"Clienter: "+cliente.getNombre()+"\n"+" ID de la transaccion: "+super.getId()+"\n"+" Pedido: "+super.getPedido()+"\n"+" Estado: "+super.getEstado()+"\n"+" Fecha de pago: "+super.getFechaPago()+"\n"+" Monto total: "+super.getMontoTotal()+"\n";
+		return "Tienda: "+tienda.getNombre()+"\n"+"Cliente: "+cliente.getNombre()+"\n"+" ID de la transaccion: "+super.getId()+"\n"+" Pedido: "+super.getPedido().toString()+"\n"+" Estado: "+super.getEstado()+"\n"+" Fecha de pago: "+super.getFechaPago()+"\n"+" Monto total: "+super.getMontoTotal()+"\n";
 	}
 }

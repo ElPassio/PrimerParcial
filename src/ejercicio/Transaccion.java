@@ -17,9 +17,6 @@ public class Transaccion {
 		this.fechaPago = fechaPago;
 		this.montoTotal = montoTotal;
 	}
-	
-	
-	
 	public int getId() {
 		return id;
 	}
