@@ -32,8 +32,8 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 		Articulo buscaArt = articulo;
 		for (int i = 0; i < inventario.length; i++) {
 			if (inventario[i].getId() == buscaArt.getId()) {
-				inventario[i] = inventario[i+1];
-				inventario[inventario.length]=null;
+				inventario[i] = inventario[i + 1];
+				inventario[inventario.length] = null;
 			}
 		}
 	}
