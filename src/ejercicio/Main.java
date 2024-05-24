@@ -68,18 +68,16 @@ public class Main {
 		// ARTICULOS DE LA TIENDA
 		Articulo comput = new Computadora("RYZEN 3600, RTX 5500, 12 GB RAM", "AMD", 2324, "Computadora", 1200000);
 		Articulo mouse = new Periferico("Mouse", "Logitech", 1233, "Logitech g-pro hero", 70000);
-		inventario[0] = comput;
-		inventario[1] = comput;
-		inventario[2] = comput;
-		inventario[3] = comput;
-		inventario[4] = mouse;
-		inventario[5] = mouse;
-		inventario[6] = mouse;
-		inventario[7] = mouse;
-		
 		// TIENDA
 		Tienda tienda = new Tienda(1, inventario, pedidosClientes, transacciones, "PassioShop", "20-42324345-4");
-
+		tienda.agregarArticulo(mouse);
+		tienda.agregarArticulo(comput);
+		for (Articulo i : tienda.getInventario()) {
+			if (i!=null) {
+				System.out.println(i.getNombre());
+			}
+			
+		}
 		//PROVEEDOR
 		Proveedor prov1 = new Proveedor("Pepe", "2252488458", pedidosTienda, "Distribuidora Pepe", "20-43820449-1");
 		
@@ -110,20 +108,14 @@ public class Main {
 						case 1:
 							//genera pedido de proveedores
 							Pedido pedT1 = new Pedido(125, art, 1, "23/5/2024");
-							Pedido pedT2 = new Pedido(125, art, 1, "23/5/2024");
-							Transaccion transac1 = new Venta();
-							tienda.agregarArticulo(art[0]);
-							tienda.agregarArticulo(art[1]);
-							tienda.realizarPedido(pedidosTienda, tienda);
-							pedidosTienda[0]=pedT1;
-							pedidosTienda[1]=pedT2;
-							pedidosTienda[0].actualizarCotizacion();
-							pedidosTienda[1].actualizarCotizacion();
+							//Transaccion transac1 = new Venta();
+							tienda.agregarPedido(pedT1);
+							cl1.realizarPedido(tienda.getPedidosClientes(), tienda);
 							prov1.setPedidostienda(pedidosTienda);
-							transac1 = prov1.despacharPedidos(prov1.getPedidostienda());
-							tienda.transacciones[0]=transac1;
-							Compra compra1 = new Compra(tienda, prov1, tienda.transacciones[0].getId(), tienda.transacciones[0].getPedido(), tienda.transacciones[0].getEstado(), tienda.transacciones[0].getFechaPago(), tienda.transacciones[0].getMontoTotal());
-							System.out.println(compra1.toString());
+							//transac1 = prov1.despacharPedidos(prov1.getPedidostienda());
+							//tienda.transacciones[0]=transac1;
+							//Compra compra1 = new Compra(tienda, prov1, tienda.transacciones[0].getId(), tienda.transacciones[0].getPedido(), tienda.transacciones[0].getEstado(), tienda.transacciones[0].getFechaPago(), tienda.transacciones[0].getMontoTotal());
+							//System.out.println(compra1.toString());
 							break;
 					}
 					break;

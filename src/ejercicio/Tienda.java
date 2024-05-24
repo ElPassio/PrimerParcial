@@ -24,10 +24,19 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 		this.transacciones = transacciones;
 	}
 
+	public void agregarPedido(Pedido pedido) {
+		for (int i = 0; i < pedidosClientes.length-1;i++) {
+			if (pedidosClientes[i] == null) {
+				pedidosClientes[i] = pedido;
+				return;
+			}
+		}
+	}
+	
 	public void agregarArticulo(Articulo articulo) {
-		for (Articulo i : inventario) {
-			if (i == null) {
-				i = articulo;
+		for (int i = 0; i < inventario.length-1;i++) {
+			if (inventario[i] == null) {
+				inventario[i] = articulo;
 				return;
 			}
 		}
@@ -60,8 +69,6 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 	}
 
 	public Articulo buscarArticulo(String nombre) {
-		//Articulo result = new Articulo();
-		//System.out.println("Se va a buscar: "+nombre);
 		for (Articulo i : inventario) {
 			if (i!=null) {
 				if (i.getNombre() == nombre) {
@@ -106,7 +113,7 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 	}
 	
 	public Transaccion despacharPedidos(Pedido pedidos[]) {
-		Transaccion t = new Transaccion();
+		Transaccion t = new Venta();
 		if (pedidos != null) {
 			for (Pedido p : pedidos) {
 				if (p != null) {
@@ -116,8 +123,8 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 								//System.out.println("\nEl articulo es: "+buscarArticulo(a.getNombre()));
 								// DESPACHAR PEDIDO si TRUE
 								t = new Transaccion(p.getId(), p, "DESPACHADO", Main.fechaHoy, p.getCotizacionTotal());
-								agregarTransaccion(t);
 								emitirFactura(t);
+								agregarTransaccion(t);
 							} else {
 								System.err.println("\nEl articulo no esta en el inventario.");
 								t = new Transaccion(p.getId(), p, "CANCELADO", Main.fechaHoy, p.getCotizacionTotal());
