@@ -32,17 +32,17 @@ public class Cliente implements Comprador{
 	public void setDocumento(int documento) {
 		this.documento = documento;
 	}
-	public void realizarPedido(Pedido pedido[], Empresa tienda) { // pedido es el pedido del cliente
+	public void realizarPedido(Pedido pedido, Empresa tienda) { // pedido es el pedido del cliente
 		if (tienda instanceof Tienda) {
 			if (pedido != null) {
-				for (Pedido p : pedido) {
 					for (Articulo aux : ((Tienda) tienda).getInventario()) {
-						if (aux.getId() == p.getId()) {
-							for                                                                                                                                        
-							((Tienda) tienda).emitirFactura(((Tienda)tienda).getTransacciones());
+						if (aux.getId() == pedido.getId()) {
+							for(Transaccion t :((Tienda)tienda).getTransacciones()) {
+								((Tienda) tienda).emitirFactura(t);
+							}
+							
 						}
 					}
-				}
 			}
 		}
 	}
