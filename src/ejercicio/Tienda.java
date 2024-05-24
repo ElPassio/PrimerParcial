@@ -62,6 +62,36 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 		double total = transaccion.getMontoTotal();
 		System.out.println(transaccion.ToString(total));
 	}
+	
+	public void agregarTransaccion(Transaccion t) {
+		for (Transaccion aux : transacciones) {
+			if (aux == null) {
+				aux = t;
+			}
+		}
+	}
+	
+	public void despacharPedidos(Pedido pedidos[]) {
+		if (pedidos != null) {
+			for (Pedido p : pedidos) {
+				if (p != null) {
+					for (Articulo a : p.getArticulo()) {
+						if (buscarArticulo(a.getNombre()) == a) {
+							// DESPACHAR PEDIDO si TRUE
+							Transaccion t = new Transaccion(p.getId(), p, "DESPACHADO", p.getFechaCotizacion(), p.getCotizacionTotal());
+							agregarTransaccion(t);
+							eliminarArticulo(buscarArticulo(a.getNombre()));
+						} else {
+							Transaccion t = new Transaccion(p.getId(), p, "CANCELADO", p.getFechaCotizacion(), p.getCotizacionTotal());
+							agregarTransaccion(t);
+						}
+					}
+				}
+			}
+		} else {
+			System.err.println("No hay pedidos cargados.");
+		}
+	}
 
 	public int getSucursal() {
 		return sucursal;
