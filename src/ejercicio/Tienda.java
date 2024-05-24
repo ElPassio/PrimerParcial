@@ -11,7 +11,7 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 		sucursal = 0;
 		inventario = new Articulo[Main.maxVec];
 		pedidosClientes = new Pedido[Main.maxVec];
-		transacciones = new Transaccion[Main.maxVec]; // quizas reemplazar maxVec
+		transacciones = new Transaccion[Main.maxVec];
 
 	}
 
@@ -57,7 +57,6 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 	}
 	
 	public void eliminarArticulo(Articulo articulo) {
-		System.out.println("Se entro a eliminarArticulo");
 		String nombre = articulo.getNombre();
 		if (buscarArticulo(articulo.getNombre()) == articulo) {
 			if (eliminar(articulo)) {
@@ -72,7 +71,6 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 		for (Articulo i : inventario) {
 			if (i!=null) {
 				if (i.getNombre() == nombre) {
-					//System.out.println("Se encontro el articulo: "+i.getNombre());
 					return i;
 				}
 			}
@@ -90,9 +88,7 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 	}
 
 	public double emitirFactura(Transaccion transaccion) {
-		System.out.println("Se entro a emitir factura");
 		if (transaccion instanceof Venta) {
-			System.out.println("Es instanceof de venta.");
 			for (Articulo a : transaccion.getPedido().getArticulo()) {
 				if (buscarArticulo(a.getNombre())==a) {
 					eliminarArticulo(buscarArticulo(a.getNombre()));
@@ -106,7 +102,6 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 		for (Transaccion aux : transacciones) {
 			if (aux == null) {
 				aux = t;
-				System.out.println("Se agrego la transaccion");
 				return;
 			}
 		}
@@ -120,7 +115,6 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 					for (Articulo a : p.getArticulo()) {
 						if (a!=null) {
 							if ((buscarArticulo(a.getNombre())) == a) {
-								//System.out.println("\nEl articulo es: "+buscarArticulo(a.getNombre()));
 								// DESPACHAR PEDIDO si TRUE
 								t = new Transaccion(p.getId(), p, "DESPACHADO", Main.fechaHoy, p.getCotizacionTotal());
 								emitirFactura(t);
