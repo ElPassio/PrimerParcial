@@ -45,9 +45,14 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 	public Articulo buscarArticulo(String nombre) {
 		Articulo result = new Articulo();
 		for (Articulo i : inventario) {
-			if (i.getNombre() == nombre) {
-				result = i;
+			if (i!=null) {
+				if (i.getNombre() == nombre) {
+					result = i;
+				}
 			}
+		}
+		if (result.getNombre().equals(nombre)) {
+			return null;
 		}
 		return result;
 	}
@@ -63,7 +68,7 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 	public double emitirFactura(Transaccion transaccion) {
 		if (transaccion instanceof Venta) {
 			for (Articulo a : transaccion.getPedido().getArticulo()) {
-				if (buscarArticulo(a.getNombre()) == a) {
+				if (buscarArticulo(a.getNombre()).equals(a)) {
 					eliminarArticulo(buscarArticulo(a.getNombre()));
 				}
 			}
@@ -85,14 +90,16 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 			for (Pedido p : pedidos) {
 				if (p != null) {
 					for (Articulo a : p.getArticulo()) {
-						if (buscarArticulo(a.getNombre()) == a) {
-							// DESPACHAR PEDIDO si TRUE
-							t = new Transaccion(p.getId(), p, "DESPACHADO", Main.fechaHoy, p.getCotizacionTotal());
-							agregarTransaccion(t);
-							emitirFactura(t);
-						} else {
-							t = new Transaccion(p.getId(), p, "CANCELADO", Main.fechaHoy, p.getCotizacionTotal());
-							agregarTransaccion(t);
+						if (a!=null) {
+							if ((buscarArticulo(a.getNombre())) == a) {
+								// DESPACHAR PEDIDO si TRUE
+								t = new Transaccion(p.getId(), p, "DESPACHADO", Main.fechaHoy, p.getCotizacionTotal());
+								agregarTransaccion(t);
+								emitirFactura(t);
+							} else {
+								t = new Transaccion(p.getId(), p, "CANCELADO", Main.fechaHoy, p.getCotizacionTotal());
+								agregarTransaccion(t);
+							}
 						}
 					}
 				}

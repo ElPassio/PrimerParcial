@@ -35,12 +35,7 @@ public class Cliente implements Comprador{
 	public void realizarPedido(Pedido pedido[], Empresa tienda) { // pedido es el pedido del cliente
 		if (tienda instanceof Tienda) {
 			if (pedido != null) {
-					for (Articulo aux : ((Tienda) tienda).getInventario()) {
-						if (aux.getId() == pedido[0].getId()) {
-							((Tienda)tienda).despacharPedidos(pedido);
-							
-						}
-					}
+				((Tienda)tienda).despacharPedidos(pedido);
 			}
 		}
 	}

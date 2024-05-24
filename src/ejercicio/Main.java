@@ -64,13 +64,18 @@ public class Main {
 		Pedido pedidosClientes[] = new Pedido[maxVec];
 		Pedido pedidosTienda[] = new Pedido[maxVec];
 		Transaccion transacciones[] = new Transaccion[maxVec];
-		Articulo art[] = new Articulo[maxVec];
 		
 		// ARTICULOS DE LA TIENDA
 		Articulo comput = new Computadora("RYZEN 3600, RTX 5500, 12 GB RAM", "AMD", 2324, "Computadora", 1200000);
 		Articulo mouse = new Periferico("Mouse", "Logitech", 1233, "Logitech g-pro hero", 70000);
-		art[0] = comput;
-		art[1] = mouse;
+		inventario[0] = comput;
+		inventario[1] = comput;
+		inventario[2] = comput;
+		inventario[3] = comput;
+		inventario[4] = mouse;
+		inventario[5] = mouse;
+		inventario[6] = mouse;
+		inventario[7] = mouse;
 		
 		// TIENDA
 		Tienda tienda = new Tienda(1, inventario, pedidosClientes, transacciones, "PassioShop", "20-42324345-4");
@@ -85,6 +90,11 @@ public class Main {
 		clientes[0]=cl1;
 		clientes[1]=cl2;
 		clientes[2]=cl3;
+		
+		// PEDIDO DE CLIENTES
+		Articulo art[] = new Articulo[maxVec];
+		art[0] = comput; art[3] = mouse;
+		art[1] = mouse; art [4] = comput;
 		
 		int opc = 1;
 		Scanner scan = new Scanner(System.in);
