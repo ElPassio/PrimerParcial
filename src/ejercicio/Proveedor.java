@@ -37,17 +37,19 @@ public class Proveedor extends Empresa implements Facturacion {
 		}
 	}
 	
-	public void despacharPedidos(Pedido pedidos[]) {
+	public Transaccion despacharPedidos(Pedido pedidos[]) {
+		Transaccion t = new Transaccion();
 		if (pedidos!= null) {
 			for (Pedido p : pedidos) {
 				if (p != null) {
-					Transaccion t = new Transaccion(p.getId(), p, "AGREGADO", Main.fechaHoy, p.getCotizacionTotal());
+					t = new Transaccion(p.getId(), p, "AGREGADO", Main.fechaHoy, p.getCotizacionTotal());
 					emitirFactura(t);
 				}
 			}
 		} else {
 			System.err.println("No hay pedidos cargados.");
 		}
+		return t;
 	}
 	
 	public String getNombreContacto() {

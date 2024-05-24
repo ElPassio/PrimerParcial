@@ -12,8 +12,9 @@ public class Empresa {
 		this.cuit = cuit;
 	}
 	
-	public void despacharPedidos(Pedido pedidos[]) {
-		
+	public Transaccion despacharPedidos(Pedido pedidos[]) {
+		Transaccion t = new Transaccion();
+		return t;
 	}
 	
 	public String getNombre() {

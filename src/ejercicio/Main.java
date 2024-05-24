@@ -98,18 +98,14 @@ public class Main {
 						case 1:
 							//genera pedido de proveedores
 							Pedido pedT1 = new Pedido(125, art, 1, "23/5/2024");
-							pedidosTienda[0]=pedT1;
-							
+							Transaccion transac1 = new Transaccion();
 							tienda.agregarArticulo(art[0]);
 							tienda.agregarArticulo(art[1]);
-							
-							//prov1.despacharPedidos(pedidosTienda);
-							Compra compra1 = new Compra();
-							if(compra1 instanceof Compra) {
-								((Compra)compra1).setTienda(tienda);
-								((Compra)compra1).setProveedor(prov1);
-							}
 							tienda.realizarPedido(pedidosTienda, tienda);
+							pedidosTienda[0]=pedT1;
+							transac1 = prov1.despacharPedidos(prov1.getPedidostienda());
+							tienda.transacciones[0]=transac1;
+							Compra compra1 = new Compra(tienda, prov1, tienda.transacciones[0].getId(), tienda.transacciones[0].getPedido(), tienda.transacciones[0].getEstado(), tienda.transacciones[0].getFechaPago(), tienda.transacciones[0].getMontoTotal());
 							System.out.println(compra1.toString());
 							break;
 						case 2:
