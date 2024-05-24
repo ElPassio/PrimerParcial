@@ -37,9 +37,7 @@ public class Cliente implements Comprador{
 			if (pedido != null) {
 					for (Articulo aux : ((Tienda) tienda).getInventario()) {
 						if (aux.getId() == pedido[0].getId()) {
-							for(Transaccion t :((Tienda)tienda).getTransacciones()) {
-								((Tienda) tienda).despacharPedido(t);
-							}
+							((Tienda)tienda).despacharPedidos(pedido);
 							
 						}
 					}
