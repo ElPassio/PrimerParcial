@@ -3,13 +3,13 @@ package ejercicio;
 public class Proveedor extends Empresa implements Facturacion {
 	private String nombreContacto;
 	private String telefonoContacto;
-	private Pedido pedidostienda[];
+	private Pedido pedidosTienda[];
 
 	public Proveedor() {
 		super();
 		this.nombreContacto = "";
 		this.telefonoContacto = "";
-		this.pedidostienda = new Pedido[Main.maxVec];
+		this.pedidosTienda = new Pedido[Main.maxVec];
 	}
 
 	public Proveedor(String nombreContacto, String telefonoContacto, Pedido[] pedidostienda, String nombre,
@@ -17,21 +17,40 @@ public class Proveedor extends Empresa implements Facturacion {
 		super(nombre, cuit);
 		this.nombreContacto = nombreContacto;
 		this.telefonoContacto = telefonoContacto;
-		this.pedidostienda = pedidostienda;
+		this.pedidosTienda = pedidostienda;
 	}
 	public void emitirFactura(Transaccion transaccion) {
-		double total = transaccion.getMontoTotal();
-		if(total<100000){
-			transaccion.setMontoTotal((total*5)/100);
-		}else if(total>100000 && total<600000) {
-			transaccion.setMontoTotal((total*10)/100);
-		}else if(total>600000 && total<1200000) {
-			transaccion.setMontoTotal((total*20)/100);
-		}else if(total>1200000) {
-			transaccion.setMontoTotal((total*30)/100);
+		if (transaccion instanceof Compra) {
+			for (Articulo a:transaccion.getPedido().getArticulo()) {
+				((Compra) transaccion).getTienda().agregarArticulo(a);
+			}
+			double total = transaccion.getMontoTotal();
+			if(total<100000){
+				transaccion.setMontoTotal((total*5)/100);
+			}else if(total>100000 && total<600000) {
+				transaccion.setMontoTotal((total*10)/100);
+			}else if(total>600000 && total<1200000) {
+				transaccion.setMontoTotal((total*20)/100);
+			}else if(total>1200000) {
+				transaccion.setMontoTotal((total*30)/100);
+			}
+			//System.out.println(transaccion.ToString(total));
 		}
-		System.out.println(transaccion.ToString(total));
 	}
+	
+	public void despacharPedido() {
+		if (pedidosTienda != null) {
+			for (Pedido p : pedidosTienda) {
+				if (p != null) {
+					Transaccion t = new Transaccion(p.getId(), p, "AGREGADO", Main.fechaHoy, p.getCotizacionTotal());
+					emitirFactura(t);
+				}
+			}
+		} else {
+			System.err.println("No hay pedidos cargados.");
+		}
+	}
+	
 	public String getNombreContacto() {
 		return nombreContacto;
 	}
@@ -49,11 +68,11 @@ public class Proveedor extends Empresa implements Facturacion {
 	}
 
 	public Pedido[] getPedidostienda() {
-		return pedidostienda;
+		return pedidosTienda;
 	}
 
 	public void setPedidostienda(Pedido[] pedidostienda) {
-		this.pedidostienda = pedidostienda;
+		this.pedidosTienda = pedidostienda;
 	}
 
 	public void despacharPedidos() {

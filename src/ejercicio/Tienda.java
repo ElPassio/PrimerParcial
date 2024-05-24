@@ -24,8 +24,12 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 		this.transacciones = transacciones;
 	}
 
-	public void agregarArticulo(Articulo articulo, int cantart) {
-		inventario[cantart] = articulo;
+	public void agregarArticulo(Articulo articulo) {
+		for (Articulo i : inventario) {
+			if (i == null) {
+				i = articulo;
+			}
+		}
 	}
 
 	public void eliminarArticulo(Articulo articulo) {
@@ -59,8 +63,14 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 	}
 
 	public void emitirFactura(Transaccion transaccion) {
-		double total = transaccion.getMontoTotal();
-		System.out.println(transaccion.ToString(total));
+		if (transaccion instanceof Venta) {
+			for (Articulo a : transaccion.getPedido().getArticulo()) {
+				if (buscarArticulo(a.getNombre()) == a) {
+					eliminarArticulo(buscarArticulo(a.getNombre()));
+				}
+			}
+		}
+		//System.out.println(transaccion.ToString(total));
 	}
 	
 	public void agregarTransaccion(Transaccion t) {
@@ -78,11 +88,11 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 					for (Articulo a : p.getArticulo()) {
 						if (buscarArticulo(a.getNombre()) == a) {
 							// DESPACHAR PEDIDO si TRUE
-							Transaccion t = new Transaccion(p.getId(), p, "DESPACHADO", p.getFechaCotizacion(), p.getCotizacionTotal());
+							Transaccion t = new Transaccion(p.getId(), p, "DESPACHADO", Main.fechaHoy, p.getCotizacionTotal());
 							agregarTransaccion(t);
-							eliminarArticulo(buscarArticulo(a.getNombre()));
+							emitirFactura(t);
 						} else {
-							Transaccion t = new Transaccion(p.getId(), p, "CANCELADO", p.getFechaCotizacion(), p.getCotizacionTotal());
+							Transaccion t = new Transaccion(p.getId(), p, "CANCELADO", Main.fechaHoy, p.getCotizacionTotal());
 							agregarTransaccion(t);
 						}
 					}

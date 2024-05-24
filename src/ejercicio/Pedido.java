@@ -19,7 +19,7 @@ public class Pedido {
 		this.fechaCotizacion = fechaCotizacion;
 	}
 
-	public void actualizarCotizacion() {
+	public void actualizarCotizacion() { // ACTUALIZA COTIZACIONTOTAL AL INGRESAR EL PEDIDO
 		if (articulo != null) {
 			for (Articulo a : articulo) {
 				if (a != null) {

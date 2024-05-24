@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Main {
 	public static final int maxVec = 10;
+	public static final String fechaHoy = "24/05/2024";
 
 	public static int menu(Scanner scan) {
 		System.out.println("Bienvenido al sistema de Emergencias\n\n" + "1) A\n" + "2) B\n" + "3) C\n" + "0) Salir\n\n"

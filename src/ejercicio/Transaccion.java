@@ -18,6 +18,8 @@ public class Transaccion {
 		this.montoTotal = montoTotal;
 	}
 	
+	
+	
 	public int getId() {
 		return id;
 	}
