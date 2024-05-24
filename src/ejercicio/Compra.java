@@ -30,4 +30,7 @@ public class Compra extends Transaccion {
 	public void setProveedor(Proveedor proveedor) {
 		this.proveedor = proveedor;
 	}
+	public String toString() {
+		return "Tienda: "+tienda.getNombre()+"\n"+"Proveedor: "+proveedor.getNombre()+"\n"+" ID de la transaccion: "+super.getId()+"\n"+" Pedido: "+super.getPedido()+"\n"+" Estado: "+super.getEstado()+"\n"+" Fecha de pago: "+super.getFechaPago()+"\n"+" Monto total: "+super.getMontoTotal()+"\n";
+	}
 }

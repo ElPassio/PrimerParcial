@@ -30,7 +30,11 @@ public class Pedido {
 			System.err.println("\nEl pedido no tiene articulos.");
 		}
 	}
-	
+	public void mostrarArticulos(Articulo[] lista) {
+		for(Articulo a : lista) {
+			System.out.println(a+"\n");
+		}
+	}
 	public int getId() {
 		return id;
 	}

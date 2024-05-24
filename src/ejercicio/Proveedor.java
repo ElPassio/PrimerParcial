@@ -34,13 +34,12 @@ public class Proveedor extends Empresa implements Facturacion {
 			}else if(total>1200000) {
 				transaccion.setMontoTotal((total*30)/100);
 			}
-			//System.out.println(transaccion.ToString(total));
 		}
 	}
 	
-	public void despacharPedido() {
-		if (pedidosTienda != null) {
-			for (Pedido p : pedidosTienda) {
+	public void despacharPedidos(Pedido pedidos[]) {
+		if (pedidos!= null) {
+			for (Pedido p : pedidos) {
 				if (p != null) {
 					Transaccion t = new Transaccion(p.getId(), p, "AGREGADO", Main.fechaHoy, p.getCotizacionTotal());
 					emitirFactura(t);
@@ -73,9 +72,5 @@ public class Proveedor extends Empresa implements Facturacion {
 
 	public void setPedidostienda(Pedido[] pedidostienda) {
 		this.pedidosTienda = pedidostienda;
-	}
-
-	public void despacharPedidos() {
-
 	}
 }
