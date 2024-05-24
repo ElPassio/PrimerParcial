@@ -20,7 +20,6 @@ public class Proveedor extends Empresa implements Facturacion {
 		this.pedidosTienda = pedidostienda;
 	}
 	public double emitirFactura(Transaccion transaccion) {
-		//System.out.println(transaccion.getMontoTotal());
 		if (transaccion instanceof Compra) {
 			for (Articulo a:transaccion.getPedido().getArticulo()) {
 				((Compra) transaccion).getTienda().agregarArticulo(a);
@@ -30,7 +29,6 @@ public class Proveedor extends Empresa implements Facturacion {
 			if(total<100000){
 				transaccion.setMontoTotal((total*5)/100);
 			}else if(total>100000 && total<600000) {
-				System.out.println("XDXDXDXDXDXDXDXDDDDD");
 				transaccion.setMontoTotal((total*10)/100);
 			}else if(total>600000 && total<1200000) {
 				transaccion.setMontoTotal((total*20)/100);

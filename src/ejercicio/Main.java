@@ -99,14 +99,16 @@ public class Main {
 						case 1:
 							//genera pedido de proveedores
 							Pedido pedT1 = new Pedido(125, art, 1, "23/5/2024");
-							//Transaccion transac1 = new Venta();
+							Transaccion transac1 = new Venta();
 							tienda.agregarPedido(pedT1);
 							cl1.realizarPedido(tienda.getPedidosClientes(), tienda);
+							pedidosTienda[0]=pedT1;
+							pedidosTienda[0].actualizarCotizacion();
 							prov1.setPedidostienda(pedidosTienda);
-							//transac1 = prov1.despacharPedidos(prov1.getPedidostienda());
-							//tienda.transacciones[0]=transac1;
-							//Compra compra1 = new Compra(tienda, prov1, tienda.transacciones[0].getId(), tienda.transacciones[0].getPedido(), tienda.transacciones[0].getEstado(), tienda.transacciones[0].getFechaPago(), tienda.transacciones[0].getMontoTotal());
-							//System.out.println(compra1.toString());
+							transac1 = prov1.despacharPedidos(prov1.getPedidostienda());
+							tienda.transacciones[0]=transac1;
+							Compra compra1 = new Compra(tienda, prov1, tienda.transacciones[0].getId(), tienda.transacciones[0].getPedido(), tienda.transacciones[0].getEstado(), tienda.transacciones[0].getFechaPago(), tienda.transacciones[0].getMontoTotal());
+							System.out.println(compra1.toString());
 							break;
 					}
 					break;
