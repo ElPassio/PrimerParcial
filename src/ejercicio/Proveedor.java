@@ -3,7 +3,7 @@ package ejercicio;
 public class Proveedor extends Empresa implements Facturacion {
 	private String nombreContacto;
 	private String telefonoContacto;
-	private Pedido pedidosTienda[];
+	protected Pedido pedidosTienda[];
 
 	public Proveedor() {
 		super();
@@ -67,11 +67,11 @@ public class Proveedor extends Empresa implements Facturacion {
 		this.telefonoContacto = telefonoContacto;
 	}
 
-	public Pedido[] getPedidostienda() {
+	public Pedido[] getPedidosTienda() {
 		return pedidosTienda;
 	}
 
-	public void setPedidostienda(Pedido[] pedidostienda) {
+	public void setPedidosTienda(Pedido[] pedidostienda) {
 		this.pedidosTienda = pedidostienda;
 	}
 
