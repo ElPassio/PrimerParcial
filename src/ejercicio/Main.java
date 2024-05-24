@@ -9,9 +9,33 @@ public class Main {
 	public static final String fechaHoy = "24/05/2024";
 
 	public static int menu(Scanner scan) {
-		System.out.println("Bienvenido al sistema de Emergencias\n\n" + "1) A\n" + "2) B\n" + "3) C\n" + "0) Salir\n\n"
-				+ "Opcion: ");
-		int op = elegirOpcion(4, 0, scan);
+		System.out.println("Bienvenido al sistema de Emergencias\n\n"
+							+ "1) Gestion de Tiendas\n"
+							+ "2) Gestion de Proveedores\n"
+							+ "3) Gestion de Clientes\n"
+							+ "0) Salir\n\n"
+							+ "Opcion: ");
+		int op = elegirOpcion(3, 0, scan);
+		return op;
+	}
+	
+	public static int menuProveedores(Scanner scan) {
+		System.out.println("Bienvenido al menu gestor de proveedores\n\n"
+							+ "1) Cargar nuevo proveedor\n"
+							+ "2) Ingresar articulo al inventario de proveedor\n"
+							+ "3) Emitir factura"
+							+ "0) Salir\n\n"
+							+ "Opcion: ");
+		int op = elegirOpcion(2, 0, scan);
+		return op;
+	}
+	
+	public static int menuTienda(Scanner scan) {
+		System.out.println("Bienvenido al menu gestor de tiendas\n\n"
+							+ "1) Generar pedido a proveedores\n"
+							+ "0) Volver\n\n"
+							+ "Opcion: ");
+		int op = elegirOpcion(1, 0, scan);
 		return op;
 	}
 
@@ -27,30 +51,103 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		// ARTICULOS
+		
+		//ARRAYS
+		Articulo inventario[] = new Articulo[maxVec];
+		Pedido pedidosClientes[] = new Pedido[maxVec];
+		Pedido pedidosTienda[] = new Pedido[maxVec];
+		Transaccion transacciones[] = new Transaccion[maxVec];
+		Articulo art[] = new Articulo[maxVec];
+		
+		// ARTICULOS DE LA TIENDA
 		Articulo comput = new Computadora("RYZEN 3600, RTX 5500, 12 GB RAM", "AMD", 2324, "Computadora", 1200000);
-        Articulo mouse = new Periferico("Mouse", "Logitech", 1233, "Logitech g-pro hero", 70000);
+		Articulo mouse = new Periferico("Mouse", "Logitech", 1233, "Logitech g-pro hero", 70000);
+		art[0] = comput;
+		art[1] = mouse;
 		
 		// TIENDA
-		Tienda tienda1 = new Tienda();
-		tienda1.setNombre("DarioShop"); tienda1.setCuit("20-20042321-4"); tienda1.setSucursal(7);
-		tienda1.setTransacciones(new Transaccion[maxTransac]); tienda1.setPedidosClientes(new Pedido[maxTransac]);
+		Tienda tienda = new Tienda(1, inventario, pedidosClientes, transacciones, "PassioShop", "20-42324345-4");
+
+		//PROVEEDOR
+		Proveedor prov1 = new Proveedor("Pepe", "2252488458", pedidosTienda, "Distribuidora Pepe", "20-43820449-1");
 		// CLIENTE
-		Cliente cl1 = new Cliente();
-		cl1.setNombre("Passio"); cl1.setApellido("Passioti"); cl1.setDocumento(2345678);
-		Pedido cl1ped = new Pedido();
-		cl1ped.articulo[0] = comput;
-		cl1ped.articulo[1] = mouse;
+		Cliente cl1 = new Cliente("Dario", "Debesa", 45465012);
 		
+		// PEDIDOS
+			//PEDIDOS DEL CLIENTE A TIENDA
+			Pedido pedC1 = new Pedido(125, art, 1, "23/5/2024");
+			pedidosClientes[0]=pedC1;
 		
-		//COMPRA CLIENTE A TIENDA
-		Transaccion compra1 = new Venta();
-		if (compra1 instanceof Venta) {
-			((Venta) compra1).setTienda(tienda1); ((Venta) compra1).setCliente(cl1);
+			//PEDIDOS DE TIENDA A PROVEEDOR
+			
+		
+		// VENTA
+		//Venta venta1 = new Venta(tienda, cl1, 1, pedT1, "", "23/5/2024", transac1.getMontoTotal());
+
+		//COMPRA
+		
+		int opc = 1;
+		Scanner scan = new Scanner(System.in);
+		while (opc!=0) {
+			
+			opc = menu(scan);
+			
+			switch(opc) {
+				case 1:
+					int opctienda=0;
+					opctienda = menuTienda(scan);
+					switch(opctienda) {
+						case 1:
+							//genera pedido de proveedores
+							Pedido pedT1 = new Pedido(125, art, 1, "23/5/2024");
+							Transaccion transac1 = new Transaccion();
+							tienda.agregarArticulo(art[0]);
+							tienda.agregarArticulo(art[1]);
+							tienda.realizarPedido(pedidosTienda, tienda);
+							pedidosTienda[0]=pedT1;
+							transac1 = prov1.despacharPedidos(prov1.getPedidostienda());
+							tienda.transacciones[0]=transac1;
+							Compra compra1 = new Compra(tienda, prov1, tienda.transacciones[0].getId(), tienda.transacciones[0].getPedido(), tienda.transacciones[0].getEstado(), tienda.transacciones[0].getFechaPago(), tienda.transacciones[0].getMontoTotal());
+							System.out.println(compra1.toString());
+							break;
+						case 2:
+							
+							break;
+					}
+					break;
+				case 2:
+					int opcprov=0;
+					opcprov = menuProveedores(scan);
+					//gestion de proveedores
+					switch(opcprov) {
+					case 1:
+						//crea nuevo proveedor
+						tienda = new Tienda(1, inventario, pedidosClientes, transacciones, "PassioShop", "20-42324345-4");
+						break;
+					case 2:
+						//busca la tienda entre las que hay con el mismo nombre
+						Tienda buscaT = new Tienda();
+						buscaT.setNombre("PassioShop");
+					
+							//compara si es igual el que esta en array al ingresado
+							if(tienda.getNombre().equals(buscaT.getNombre())) {
+								//ingresa un nuevo articulo al inventario de la tienda seleccionada
+									tienda.getInventario()[0] = art[0];
+							}
+						
+						break;
+				}
+					break;
+				case 3:
+					
+					break;
+				default:
+				
+				  break;
+			}
+			
 		}
-		cl1.realizarPedido(cl1ped, tienda1);
-		
-		
+		scan.close();
 	}
 
 }

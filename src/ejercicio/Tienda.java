@@ -53,12 +53,12 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 	}
 
 	public void realizarPedido(Pedido pedido[], Empresa empresa) {
-        if (empresa instanceof Proveedor) {
-            if (pedido != null) {
-                ((Proveedor)empresa).despacharPedidos(pedido);
-            }
-        }
-    }
+		if (empresa instanceof Proveedor) {
+			if (pedido != null) {
+					((Proveedor)empresa).despacharPedidos(pedido);
+			}
+		}
+	}
 
 	public void emitirFactura(Transaccion transaccion) {
 		if (transaccion instanceof Venta) {
@@ -78,18 +78,19 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 		}
 	}
 	
-	public void despacharPedidos(Pedido pedidos[]) {
+	public Transaccion despacharPedidos(Pedido pedidos[]) {
+		Transaccion t = new Transaccion();
 		if (pedidos != null) {
 			for (Pedido p : pedidos) {
 				if (p != null) {
 					for (Articulo a : p.getArticulo()) {
 						if (buscarArticulo(a.getNombre()) == a) {
 							// DESPACHAR PEDIDO si TRUE
-							Transaccion t = new Transaccion(p.getId(), p, "DESPACHADO", Main.fechaHoy, p.getCotizacionTotal());
+							t = new Transaccion(p.getId(), p, "DESPACHADO", Main.fechaHoy, p.getCotizacionTotal());
 							agregarTransaccion(t);
 							emitirFactura(t);
 						} else {
-							Transaccion t = new Transaccion(p.getId(), p, "CANCELADO", Main.fechaHoy, p.getCotizacionTotal());
+							t = new Transaccion(p.getId(), p, "CANCELADO", Main.fechaHoy, p.getCotizacionTotal());
 							agregarTransaccion(t);
 						}
 					}
@@ -98,6 +99,7 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 		} else {
 			System.err.println("No hay pedidos cargados.");
 		}
+		return t;
 	}
 
 	public int getSucursal() {

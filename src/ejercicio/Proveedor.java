@@ -34,21 +34,22 @@ public class Proveedor extends Empresa implements Facturacion {
 			}else if(total>1200000) {
 				transaccion.setMontoTotal((total*30)/100);
 			}
-			//System.out.println(transaccion.ToString(total));
 		}
 	}
 	
-	public void despacharPedidos(Pedido pedidosTienda[]) {
-		if (pedidosTienda != null) {
-			for (Pedido p : pedidosTienda) {
+	public Transaccion despacharPedidos(Pedido pedidos[]) {
+		Transaccion t = new Transaccion();
+		if (pedidos!= null) {
+			for (Pedido p : pedidos) {
 				if (p != null) {
-					Transaccion t = new Transaccion(p.getId(), p, "AGREGADO", Main.fechaHoy, p.getCotizacionTotal());
+					t = new Transaccion(p.getId(), p, "AGREGADO", Main.fechaHoy, p.getCotizacionTotal());
 					emitirFactura(t);
 				}
 			}
 		} else {
 			System.err.println("No hay pedidos cargados.");
 		}
+		return t;
 	}
 	
 	public String getNombreContacto() {
@@ -74,5 +75,4 @@ public class Proveedor extends Empresa implements Facturacion {
 	public void setPedidostienda(Pedido[] pedidostienda) {
 		this.pedidosTienda = pedidostienda;
 	}
-
 }
