@@ -19,27 +19,29 @@ public class Proveedor extends Empresa implements Facturacion {
 		this.telefonoContacto = telefonoContacto;
 		this.pedidosTienda = pedidostienda;
 	}
-	public void emitirFactura(Transaccion transaccion) {
+
+	public double emitirFactura(Transaccion transaccion) {
+		double total = transaccion.getMontoTotal();
+		if (total < 100000) {
+			transaccion.setMontoTotal((total * 5) / 100);
+		} else if (total > 100000 && total < 600000) {
+			transaccion.setMontoTotal((total * 10) / 100);
+		} else if (total > 600000 && total < 1200000) {
+			transaccion.setMontoTotal((total * 20) / 100);
+		} else if (total > 1200000) {
+			transaccion.setMontoTotal((total * 30) / 100);
+		}
 		if (transaccion instanceof Compra) {
-			for (Articulo a:transaccion.getPedido().getArticulo()) {
-				((Compra) transaccion).getTienda().agregarArticulo(a);
-			}
-			double total = transaccion.getMontoTotal();
-			if(total<100000){
-				transaccion.setMontoTotal((total*5)/100);
-			}else if(total>100000 && total<600000) {
-				transaccion.setMontoTotal((total*10)/100);
-			}else if(total>600000 && total<1200000) {
-				transaccion.setMontoTotal((total*20)/100);
-			}else if(total>1200000) {
-				transaccion.setMontoTotal((total*30)/100);
+			for (Articulo a : transaccion.getPedido().getArticulo()) {
+				 ((Compra) transaccion).getTienda().agregarArticulo(a);
 			}
 		}
+		return transaccion.getMontoTotal();
 	}
-	
+
 	public Transaccion despacharPedidos(Pedido pedidos[]) {
 		Transaccion t = new Transaccion();
-		if (pedidos!= null) {
+		if (pedidos != null) {
 			for (Pedido p : pedidos) {
 				if (p != null) {
 					t = new Transaccion(p.getId(), p, "AGREGADO", Main.fechaHoy, p.getCotizacionTotal());
@@ -51,7 +53,7 @@ public class Proveedor extends Empresa implements Facturacion {
 		}
 		return t;
 	}
-	
+
 	public String getNombreContacto() {
 		return nombreContacto;
 	}

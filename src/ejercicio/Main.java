@@ -7,19 +7,18 @@ public class Main {
 	public static final String fechaHoy = "24/05/2024";
 
 	public static int menu(Scanner scan) {
-		System.out.println("Bienvenido al sistema de Emergencias\n\n"
-							+ "1) Gestion de Tiendas\n"
-							+ "2) Gestion de Proveedores\n"
-							+ "3) Gestion de Clientes\n"
+		System.out.println("Bienvenido al sistema de compra y venta\n\n"
+							+ "1) Menu de Tienda\n"
+							+ "2) Menu de Cliente\n"
 							+ "0) Salir\n\n"
 							+ "Opcion: ");
 		int op = elegirOpcion(3, 0, scan);
 		return op;
 	}
 	
-	public static int menuProveedores(Scanner scan) {
-		System.out.println("Bienvenido al menu gestor de proveedores\n\n"
-							+ "1) Cargar nuevo proveedor\n"
+	public static int menuCliente(Scanner scan) {
+		System.out.println("Bienvenido al menu de cliente\n\n"
+							+ "1) Comprar articulo\n"
 							+ "2) Ingresar articulo al inventario de proveedor\n"
 							+ "3) Emitir factura"
 							+ "0) Salir\n\n"
@@ -98,24 +97,27 @@ public class Main {
 						case 1:
 							//genera pedido de proveedores
 							Pedido pedT1 = new Pedido(125, art, 1, "23/5/2024");
+							Pedido pedT2 = new Pedido(125, art, 1, "23/5/2024");
 							Transaccion transac1 = new Transaccion();
+							transac1.setMontoTotal(100000);
 							tienda.agregarArticulo(art[0]);
 							tienda.agregarArticulo(art[1]);
 							tienda.realizarPedido(pedidosTienda, tienda);
 							pedidosTienda[0]=pedT1;
+							pedidosTienda[1]=pedT2;
+							pedidosTienda[0].actualizarCotizacion();
+							pedidosTienda[1].actualizarCotizacion();
+							prov1.setPedidostienda(pedidosTienda);
 							transac1 = prov1.despacharPedidos(prov1.getPedidostienda());
 							tienda.transacciones[0]=transac1;
 							Compra compra1 = new Compra(tienda, prov1, tienda.transacciones[0].getId(), tienda.transacciones[0].getPedido(), tienda.transacciones[0].getEstado(), tienda.transacciones[0].getFechaPago(), tienda.transacciones[0].getMontoTotal());
 							System.out.println(compra1.toString());
 							break;
-						case 2:
-							
-							break;
 					}
 					break;
 				case 2:
 					int opcprov=0;
-					opcprov = menuProveedores(scan);
+					opcprov = menuCliente(scan);
 					//gestion de proveedores
 					switch(opcprov) {
 					case 1:
