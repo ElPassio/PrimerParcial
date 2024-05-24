@@ -2,6 +2,13 @@ package ejercicio;
 
 import java.util.Scanner;
 
+	/*
+	 * @author Passiotti Agustin Alejandro, Debesa Dario
+	 * @date 24/5/2024
+	 * @brief Primer Parcial Programacion III
+	 * 
+	 * */
+
 public class Main {
 	public static final int maxVec = 10;
 	public static final int maxTransac = 50;
@@ -63,12 +70,7 @@ public class Main {
 		Tienda tienda = new Tienda(1, inventario, pedidosClientes, transacciones, "PassioShop", "20-42324345-4");
 		tienda.agregarArticulo(mouse);
 		tienda.agregarArticulo(comput);
-		for (Articulo i : tienda.getInventario()) {
-			if (i!=null) {
-				System.out.println(i.getNombre());
-			}
-			
-		}
+		
 		//PROVEEDOR
 		Proveedor prov1 = new Proveedor("Pepe", "2252488458", pedidosTienda, "Distribuidora Pepe", "20-43820449-1");
 		
@@ -100,14 +102,19 @@ public class Main {
 							//genera pedido de proveedores
 							Pedido pedT1 = new Pedido(125, art, 1, "23/5/2024");
 							Transaccion transac1 = new Venta();
+							//agrega el pedido a la lista de la tienda
 							tienda.agregarPedido(pedT1);
-							cl1.realizarPedido(tienda.getPedidosClientes(), tienda);
 							pedidosTienda[0]=pedT1;
+							//actualiza el precio total del pedido con sus articulos;
 							pedidosTienda[0].actualizarCotizacion();
+							//el proveedor obtiene el pedido de la tienda
 							prov1.setPedidostienda(pedidosTienda);
+							//se crea una transaccion como resultado de que el proveedor despacha el pedido
 							transac1 = prov1.despacharPedidos(prov1.getPedidostienda());
 							tienda.transacciones[0]=transac1;
+							//se efectua la compra al proveedor
 							Compra compra1 = new Compra(tienda, prov1, tienda.transacciones[0].getId(), tienda.transacciones[0].getPedido(), tienda.transacciones[0].getEstado(), tienda.transacciones[0].getFechaPago(), tienda.transacciones[0].getMontoTotal());
+							//muestra los detalles de la compra
 							System.out.println(compra1.toString());
 							break;
 					}
@@ -117,27 +124,26 @@ public class Main {
 					opccte = menuCliente(scan);
 					switch(opccte) {
 					case 1:
-						//elegir cliente
-						Cliente c = new Cliente();
-						c = clientes[0];
+						//crea el pedido del cliente
 						Pedido pedC11 = new Pedido(125, art, 1, "23/5/2024");
-						Pedido pedC12 = new Pedido(125, art, 1, "23/5/2024");
 						Transaccion transac2 = new Transaccion();
+						//se carga al array de pedidos
 						pedidosClientes[0]=pedC11;
-						pedidosClientes[1]=pedC12;
 						pedidosClientes[0].actualizarCotizacion();
-						pedidosClientes[1].actualizarCotizacion();
-						c.realizarPedido(pedidosClientes, tienda);
-						//prov1.setPedidostienda(pedidosTienda);
+						//el cliente realiza pedido a la tienda
+						clientes[0].realizarPedido(pedidosClientes, tienda);
+						//se crea una transaccion como resultado de despachar pedido de tienda
 						transac2 = tienda.despacharPedidos(tienda.getPedidosClientes());
 						tienda.transacciones[1]=transac2;
-						Venta venta1 = new Venta(tienda, c, tienda.transacciones[1].getId(), tienda.transacciones[1].getPedido(), tienda.transacciones[1].getEstado(), tienda.transacciones[1].getFechaPago(), tienda.transacciones[1].getMontoTotal());
+						//se efectua la venta
+						Venta venta1 = new Venta(tienda, clientes[0], tienda.transacciones[1].getId(), tienda.transacciones[1].getPedido(), tienda.transacciones[1].getEstado(), tienda.transacciones[1].getFechaPago(), tienda.transacciones[1].getMontoTotal());
+						//muestra los detalles de la venta
 						System.out.println(venta1.toString());
 						break;
 				}
 					break;
 				default:
-				
+					System.out.println("Gracias por Utilizar este programa");
 				  break;
 			}
 			
