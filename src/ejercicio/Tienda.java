@@ -134,8 +134,4 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 	public void setTransacciones(Transaccion[] transacciones) {
 		this.transacciones = transacciones;
 	}
-
-	public void despacharPedidos(Tienda tienda, Articulo comp, String nombre) {
-
-	}
 }

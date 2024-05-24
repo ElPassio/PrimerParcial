@@ -2,7 +2,7 @@ package ejercicio;
 
 public class Pedido {
 	private int id;
-	private Articulo[] articulo;
+	protected Articulo[] articulo;
 	private double cotizacionTotal;
 	private String fechaCotizacion;
 	

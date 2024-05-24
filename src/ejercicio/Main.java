@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class Main {
 	public static final int maxVec = 10;
+	public static final int maxTransac = 50;
+	
 	public static final String fechaHoy = "24/05/2024";
 
 	public static int menu(Scanner scan) {
@@ -25,47 +27,30 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		// ARTICULOS DE LA TIENDA
-		Articulo comput = new Computadora("RYZEN 3600, RTX 5500, 12 GB RAM", "AMD", 2324, "Computadora", 3500);
-
+		// ARTICULOS
+		Articulo comput = new Computadora("RYZEN 3600, RTX 5500, 12 GB RAM", "AMD", 2324, "Computadora", 1200000);
+        Articulo mouse = new Periferico("Mouse", "Logitech", 1233, "Logitech g-pro hero", 70000);
+		
 		// TIENDA
-		int cantart = 0;
-		Articulo inventario[] = new Articulo[maxVec];
-		Pedido pedidosClientes[] = new Pedido[maxVec];
-		Transaccion transacciones[] = new Transaccion[maxVec];
-		Tienda tienda = new Tienda(1, inventario, pedidosClientes, transacciones, "PassioShop", "20-42324345-4");
-		tienda.inventario[0] = comput;
-		tienda.inventario[1] = comput;
-
+		Tienda tienda1 = new Tienda();
+		tienda1.setNombre("DarioShop"); tienda1.setCuit("20-20042321-4"); tienda1.setSucursal(7);
+		tienda1.setTransacciones(new Transaccion[maxTransac]); tienda1.setPedidosClientes(new Pedido[maxTransac]);
 		// CLIENTE
-		Cliente cl1 = new Cliente("Dario", "Debesa", 45465012);
-		// PEDIDO DEL CLIENTE
-		Articulo artcl1[] = new Articulo[1];
-		artcl1[0] = comput;
-		Pedido pedcl1 = new Pedido(125, artcl1, artcl1[0].getPrecio(), "23/5/2024");
-		// TRANSACCION
-		Transaccion transac1 = new Transaccion(12, pedcl1, "", "23/5/2024", pedcl1.getCotizacionTotal());
-		// VENTA
-		Venta venta1 = new Venta(tienda, cl1, 1, pedcl1, "", "23/5/2024", transac1.getMontoTotal());
-		tienda.agregarArticulo(comput, cantart);
-
-		/*
-		 * int opc = 1; Scanner scan = new Scanner(System.in); while (opc!=0) {
-		 * 
-		 * opc = menu(scan);
-		 * 
-		 * switch(opc) { case 1:
-		 * 
-		 * break; case 2:
-		 * 
-		 * break; case 3:
-		 * 
-		 * break; default:
-		 * 
-		 * break; }
-		 * 
-		 * } scan.close();
-		 */
+		Cliente cl1 = new Cliente();
+		cl1.setNombre("Passio"); cl1.setApellido("Passioti"); cl1.setDocumento(2345678);
+		Pedido cl1ped = new Pedido();
+		cl1ped.articulo[0] = comput;
+		cl1ped.articulo[1] = mouse;
+		
+		
+		//COMPRA CLIENTE A TIENDA
+		Transaccion compra1 = new Venta();
+		if (compra1 instanceof Venta) {
+			((Venta) compra1).setTienda(tienda1); ((Venta) compra1).setCliente(cl1);
+		}
+		cl1.realizarPedido(cl1ped, tienda1);
+		
+		
 	}
 
 }
