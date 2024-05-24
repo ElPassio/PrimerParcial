@@ -12,18 +12,16 @@ public class Main {
 							+ "2) Menu de Cliente\n"
 							+ "0) Salir\n\n"
 							+ "Opcion: ");
-		int op = elegirOpcion(3, 0, scan);
+		int op = elegirOpcion(2, 0, scan);
 		return op;
 	}
 	
 	public static int menuCliente(Scanner scan) {
 		System.out.println("Bienvenido al menu de cliente\n\n"
 							+ "1) Comprar articulo\n"
-							+ "2) Ingresar articulo al inventario de proveedor\n"
-							+ "3) Emitir factura"
 							+ "0) Salir\n\n"
 							+ "Opcion: ");
-		int op = elegirOpcion(2, 0, scan);
+		int op = elegirOpcion(1, 0, scan);
 		return op;
 	}
 	
@@ -46,10 +44,20 @@ public class Main {
 		}
 		return opc;
 	}
+	public static Cliente buscarCliente(Cliente clientes[], int docBuscar) {
+		Cliente aux = new Cliente();
+		for(int i=0; i<clientes.length; i++) {
+			if(docBuscar == clientes[i].getDocumento()) {
+				aux =clientes[i];
+			}
+		}
+		return aux;
+	}
 
 	public static void main(String[] args) {
 		
 		//ARRAYS
+		Cliente clientes[] = new Cliente[maxVec];
 		Articulo inventario[] = new Articulo[maxVec];
 		Pedido pedidosClientes[] = new Pedido[maxVec];
 		Pedido pedidosTienda[] = new Pedido[maxVec];
@@ -67,21 +75,14 @@ public class Main {
 
 		//PROVEEDOR
 		Proveedor prov1 = new Proveedor("Pepe", "2252488458", pedidosTienda, "Distribuidora Pepe", "20-43820449-1");
+		
 		// CLIENTE
 		Cliente cl1 = new Cliente("Dario", "Debesa", 45465012);
-		
-		// PEDIDOS
-			//PEDIDOS DEL CLIENTE A TIENDA
-			Pedido pedC1 = new Pedido(125, art, 1, "23/5/2024");
-			pedidosClientes[0]=pedC1;
-		
-			//PEDIDOS DE TIENDA A PROVEEDOR
-			
-		
-		// VENTA
-		//Venta venta1 = new Venta(tienda, cl1, 1, pedT1, "", "23/5/2024", transac1.getMontoTotal());
-
-		//COMPRA
+		Cliente cl2 = new Cliente("Agustin", "Passiotti", 43820449);
+		Cliente cl3 = new Cliente("Lionel", "Messi", 33016244);
+		clientes[0]=cl1;
+		clientes[1]=cl2;
+		clientes[2]=cl3;
 		
 		int opc = 1;
 		Scanner scan = new Scanner(System.in);
@@ -99,7 +100,6 @@ public class Main {
 							Pedido pedT1 = new Pedido(125, art, 1, "23/5/2024");
 							Pedido pedT2 = new Pedido(125, art, 1, "23/5/2024");
 							Transaccion transac1 = new Transaccion();
-							transac1.setMontoTotal(100000);
 							tienda.agregarArticulo(art[0]);
 							tienda.agregarArticulo(art[1]);
 							tienda.realizarPedido(pedidosTienda, tienda);
@@ -116,13 +116,26 @@ public class Main {
 					}
 					break;
 				case 2:
-					int opcprov=0;
-					opcprov = menuCliente(scan);
-					//gestion de proveedores
-					switch(opcprov) {
+					int opccte=0;
+					opccte = menuCliente(scan);
+					switch(opccte) {
 					case 1:
-						//crea nuevo proveedor
-						tienda = new Tienda(1, inventario, pedidosClientes, transacciones, "PassioShop", "20-42324345-4");
+						//elegir cliente
+						Cliente c = new Cliente();
+						c = clientes[0];
+						Pedido pedC11 = new Pedido(125, art, 1, "23/5/2024");
+						Pedido pedC12 = new Pedido(125, art, 1, "23/5/2024");
+						Transaccion transac2 = new Transaccion();
+						pedidosClientes[0]=pedC11;
+						pedidosClientes[1]=pedC12;
+						pedidosClientes[0].actualizarCotizacion();
+						pedidosClientes[1].actualizarCotizacion();
+						c.realizarPedido(pedidosClientes, tienda);
+						//prov1.setPedidostienda(pedidosTienda);
+						transac2 = tienda.despacharPedidos(tienda.getPedidosClientes());
+						tienda.transacciones[1]=transac2;
+						Venta venta1 = new Venta(tienda, c, tienda.transacciones[1].getId(), tienda.transacciones[1].getPedido(), tienda.transacciones[1].getEstado(), tienda.transacciones[1].getFechaPago(), tienda.transacciones[1].getMontoTotal());
+						System.out.println(venta1.toString());
 						break;
 					case 2:
 						//busca la tienda entre las que hay con el mismo nombre
