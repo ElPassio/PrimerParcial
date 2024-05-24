@@ -38,7 +38,7 @@ public class Proveedor extends Empresa implements Facturacion {
 		}
 	}
 	
-	public void despacharPedido() {
+	public void despacharPedidos(Pedido pedidosTienda[]) {
 		if (pedidosTienda != null) {
 			for (Pedido p : pedidosTienda) {
 				if (p != null) {
@@ -75,7 +75,4 @@ public class Proveedor extends Empresa implements Facturacion {
 		this.pedidosTienda = pedidostienda;
 	}
 
-	public void despacharPedidos() {
-
-	}
 }

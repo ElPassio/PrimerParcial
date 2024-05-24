@@ -52,15 +52,13 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 		return result;
 	}
 
-	public void realizarPedido(Pedido pedido, Empresa empresa) {
-		if (empresa instanceof Proveedor) {
-			if (pedido != null) {
-				for (Transaccion t : ((Tienda) empresa).getTransacciones()) {
-					((Proveedor) empresa).emitirFactura(t);
-				}
-			}
-		}
-	}
+	public void realizarPedido(Pedido pedido[], Empresa empresa) {
+        if (empresa instanceof Proveedor) {
+            if (pedido != null) {
+                ((Proveedor)empresa).despacharPedidos(pedido);
+            }
+        }
+    }
 
 	public void emitirFactura(Transaccion transaccion) {
 		if (transaccion instanceof Venta) {
@@ -70,7 +68,6 @@ public class Tienda extends Empresa implements Facturacion, Comprador {
 				}
 			}
 		}
-		//System.out.println(transaccion.ToString(total));
 	}
 	
 	public void agregarTransaccion(Transaccion t) {
